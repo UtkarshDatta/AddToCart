@@ -82,12 +82,21 @@ console.log(getdata);
                                         <>
                                         <tr>
                                             <td>
+                                                <NavLink to={'/cart/${e.id}'}>
                                                 <img src={e.imgdata} style={{width:"5rem", height:"5rem"}}></img>
+                                                </NavLink>
+                                                
                                             </td>
                                             <td>
                                                <p> {e.rname} </p>
                                                <p> Price : ₹ {e.price} </p>
                                                <p> Quantity :  {e.qnty} </p>
+                                               <p style={{color:"red", fontSize:20, cursor:"pointer"}}>
+                                                <i className="fas fa-trash smalltrash"></i>
+                                               </p>
+                                            </td>
+                                            <td className="mt-5" style={{color:"red", fontSize:20, cursor:"pointer"}}>
+                                            <i className="fas fa-trash largetrash"></i>
                                             </td>
 
                                         </tr>
@@ -95,6 +104,7 @@ console.log(getdata);
                                     )
                                 })
                             }
+                            <p className="text-center"> Total : ₹ 300</p>
                         </tbody>
                     </Table>
 

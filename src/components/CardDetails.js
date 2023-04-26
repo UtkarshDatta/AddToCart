@@ -1,24 +1,47 @@
 import { green } from '@mui/material/colors'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Table from "react-bootstrap/Table"
+import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const CardDetails = () => {
+const [data,setData]= useState([]);
+
+const {id} = useParams();
+
+const getdata = useSelector((state)=> state.cartreducer.carts);
+
+const compare =()=>{
+  let comparedata = getdata.filter((e)=>{
+    return e.id == id
+  })
+
+}
+useEffect(()=>{
+  compare()
+},[id])
+
+
+
   return (
     <div className='container mt-2'>
       <h2 className='text-center'>Item Details Page</h2>
 
       <section className='container mt-3'>
         <div className='itemsdetails'>
-          <div className='items_img'>
-            <img src='https://b.zmtcdn.com/data/pictures/9/18857339/8f53919f1175c08cf0f0371b73704f9b_o2_featured_v2.jpg?output-format=webp' />
+          {
+            data.map((ele)=>{
+              return <>
+               <div className='items_img'>
+            <img src= {ele.imgdata} />
           </div>
           <div className='details'>
             <Table>
               <tr>
                 <td>
-                  <p><strong>Restaurant</strong> :Massala Theoryy </p>
-                  <p><strong>Price</strong> :₹ 300 </p>
-                  <p><strong>Dishes</strong> :Massala Theoryy </p>
+                  <p><strong>Restaurant</strong> :{ele.rname} </p>
+                  <p><strong>Price</strong> :₹ {ele.price} </p>
+                  <p><strong>Dishes</strong> :{ele.address} </p>
                   <p><strong>Total</strong> :₹ 300 </p>
                 </td>
                 <td>
@@ -29,6 +52,11 @@ const CardDetails = () => {
               </tr>
             </Table>
           </div>
+
+              </>
+            })
+          }
+         
 
         </div>
       </section>
