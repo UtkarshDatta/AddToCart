@@ -82,7 +82,7 @@ console.log(getdata);
                                         <>
                                         <tr>
                                             <td>
-                                                <NavLink to={'/cart/${e.id}'}>
+                                                <NavLink to={"/cart/${e.id}"}>
                                                 <img src={e.imgdata} style={{width:"5rem", height:"5rem"}}></img>
                                                 </NavLink>
                                                 
@@ -108,7 +108,7 @@ console.log(getdata);
                         </tbody>
                     </Table>
 
-                </div>:
+                </div> :
                 <div className="card-details d-flex justify-content-center align-items-center" style={{ width:"24rem", padding:10, position:"relative"}}>
                 <i  className="fas fa-close smallclose" onClick={handleClose}
             style={{position:"absolute", top:2 , right :20, fontSize:23, cursor:"pointer"}}></i>

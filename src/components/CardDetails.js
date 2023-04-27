@@ -9,21 +9,23 @@ const [data,setData]= useState([]);
 
 const {id} = useParams();
 
+
 const getdata = useSelector((state)=> state.cartreducer.carts);
 
 const compare =()=>{
   let comparedata = getdata.filter((e)=>{
     return e.id == id
-  })
-
+  });
+  setData(comparedata);
 }
-useEffect(()=>{
-  compare()
+useEffect(() => {
+  compare();
 },[id])
 
 
 
   return (
+    <>
     <div className='container mt-2'>
       <h2 className='text-center'>Item Details Page</h2>
 
@@ -31,7 +33,8 @@ useEffect(()=>{
         <div className='itemsdetails'>
           {
             data.map((ele)=>{
-              return <>
+              return (
+              <>
                <div className='items_img'>
             <img src= {ele.imgdata} />
           </div>
@@ -54,14 +57,18 @@ useEffect(()=>{
           </div>
 
               </>
-            })
+              )
+
+              })
           }
          
 
-        </div>
+         </div>
       </section>
 
     </div>
+    </>
+    
   )
 }
 

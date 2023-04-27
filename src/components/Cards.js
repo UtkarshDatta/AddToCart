@@ -13,7 +13,7 @@ const Cards = () => {
 
   }
 
-
+ 
   const [data, setData] = useState(Cardsdata);
   return (
     <div className='container mt-3'>
@@ -21,7 +21,7 @@ const Cards = () => {
 
 
       <div className='row d-flex justify-content-center align-items-center'>
-        {data.map((element, id) => {
+        {data.map((element,id) => {
           return (
             <>
               <Card style={{ width: '22rem', border:'none' }} className='mx-2 mt-4 card_style'>
