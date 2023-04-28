@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Badge from '@mui/material/Badge';
@@ -12,7 +12,8 @@ import { DLT } from "./redux/actions/action";
 
 const Header = () => {
 
-    
+  const [price,SetPrice]= useState(0);  
+  
     
     
 
@@ -30,9 +31,25 @@ const dispatch= useDispatch();
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+
 const dlt = (id)=>{
     dispatch(DLT(id))
 }
+
+const total = ()=>{
+
+    let price= 0;
+    getdata.map((ele,k)=>{
+        price = ele.price + price
+    });
+    SetPrice(price);
+
+};
+
+useEffect(()=>{
+    total();
+},[total])
 
     return (
         <>
@@ -109,7 +126,7 @@ const dlt = (id)=>{
                                     )
                                 })
                             }
-                            <p className="text-center"> Total : ₹ 300</p>
+                            <p className="text-center"> Total : ₹ {price}</p>
                         </tbody>
                     </Table>
 

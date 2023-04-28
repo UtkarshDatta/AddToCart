@@ -1,14 +1,19 @@
 import { green } from '@mui/material/colors'
 import React, { useEffect, useState } from 'react'
 import Table from "react-bootstrap/Table"
-import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { DLT } from './redux/actions/action'
 
 
 const CardDetails = () => {
 const [data,setData]= useState([]);
 
 const {id} = useParams();
+
+const history = useNavigate();
+
+const dispatch = useDispatch();
 
 
 const getdata = useSelector((state)=> state.cartreducer.carts);
@@ -19,6 +24,13 @@ const compare =()=>{
   });
   setData(comparedata);
 }
+const dlt = (id)=>{
+  dispatch(DLT(id))
+
+  history("/");
+}
+
+
 useEffect(() => {
   compare();
 },[id])
@@ -51,7 +63,7 @@ useEffect(() => {
                 <td>
                   <p><strong>Rating :</strong><span style={{ background: "green", color: "#fff", padding: "2px 5px ", borderRadius: "5px" }}>3.5 ★</span></p>
                   <p><strong>Order Review :</strong> <span>:Massala Theoryy</span> </p>
-                  <p><strong>Remove : </strong> <span><i className='fas fa-trash' style={{color:"red ", fontSize:20 , cursor: "pointer"}}></i></span> </p>
+                  <p><strong>Remove : </strong> <span><i className='fas fa-trash' onClick={()=>dlt(ele.id)} style={{color:"red ", fontSize:20 , cursor: "pointer"}}></i></span> </p>
                 </td>
               </tr>
             </Table>
