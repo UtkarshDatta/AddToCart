@@ -4,6 +4,7 @@ import Table from "react-bootstrap/Table"
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+
 const CardDetails = () => {
 const [data,setData]= useState([]);
 

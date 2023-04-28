@@ -6,8 +6,9 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Nav from "react-bootstrap/Nav";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Table } from "react-bootstrap";
+import { DLT } from "./redux/actions/action";
 
 const Header = () => {
 
@@ -16,7 +17,8 @@ const Header = () => {
     
 
 const getdata = useSelector((state)=> state.cartreducer.carts);
-console.log(getdata);
+
+const dispatch= useDispatch();
 
 
 
@@ -28,7 +30,9 @@ console.log(getdata);
     const handleClose = () => {
         setAnchorEl(null);
     };
-
+const dlt = (id)=>{
+    dispatch(DLT(id))
+}
 
     return (
         <>
@@ -82,7 +86,8 @@ console.log(getdata);
                                         <>
                                         <tr>
                                             <td>
-                                                <NavLink to={"/cart/${e.id}"}>
+                                            <NavLink to={`/cart/${e.id}`} onClick={handleClose}>
+
                                                 <img src={e.imgdata} style={{width:"5rem", height:"5rem"}}></img>
                                                 </NavLink>
                                                 
@@ -91,11 +96,11 @@ console.log(getdata);
                                                <p> {e.rname} </p>
                                                <p> Price : ₹ {e.price} </p>
                                                <p> Quantity :  {e.qnty} </p>
-                                               <p style={{color:"red", fontSize:20, cursor:"pointer"}}>
+                                               <p style={{color:"red", fontSize:20, cursor:"pointer"}}  onClick={()=>dlt(e.id)}>
                                                 <i className="fas fa-trash smalltrash"></i>
                                                </p>
                                             </td>
-                                            <td className="mt-5" style={{color:"red", fontSize:20, cursor:"pointer"}}>
+                                            <td className="mt-5" style={{color:"red", fontSize:20, cursor:"pointer"}}  onClick={()=>dlt(e.id)}>
                                             <i className="fas fa-trash largetrash"></i>
                                             </td>
 

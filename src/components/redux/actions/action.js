@@ -6,3 +6,12 @@ export const ADD = (item) => {
 
     
 }
+
+export const DLT = (id) => {
+    return{
+        type: "RMV_CART",
+        payload: id
+    }
+
+    
+}
