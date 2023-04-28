@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Table from "react-bootstrap/Table"
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { DLT } from './redux/actions/action'
+import { DLT,ADD,REMOVE } from './redux/actions/action'
 
 
 const CardDetails = () => {
@@ -24,12 +24,20 @@ const compare =()=>{
   });
   setData(comparedata);
 }
+const send =(e)=>{
+  dispatch(ADD(e));
+
+}
+
 const dlt = (id)=>{
   dispatch(DLT(id))
 
   history("/");
 }
 
+const remove= (item)=>{
+  dispatch(REMOVE(item))
+}
 
 useEffect(() => {
   compare();
@@ -59,6 +67,11 @@ useEffect(() => {
                   <p><strong>Price</strong> :₹ {ele.price} </p>
                   <p><strong>Dishes</strong> :{ele.address} </p>
                   <p><strong>Total</strong> :₹ 300 </p>
+                  <div className='mt-5 d-flex justify-content-between align-items-center ' style={{width:100, cursor:"pointer", background:"#ddd", color:"#111"}}>
+                  <span style={{fontSize:24}}onClick={()=>remove(ele)}>-</span>
+                  <span style={{fontSize:22}}>{ele.qnty}</span>
+                  <span style={{fontSize:24}} onClick={()=>send(ele)}>+</span>
+                  </div>
                 </td>
                 <td>
                   <p><strong>Rating :</strong><span style={{ background: "green", color: "#fff", padding: "2px 5px ", borderRadius: "5px" }}>3.5 ★</span></p>
