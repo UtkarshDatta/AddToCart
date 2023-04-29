@@ -12,14 +12,14 @@ import { DLT } from "./redux/actions/action";
 
 const Header = () => {
 
-  const [price,SetPrice]= useState(0);  
-  
-    
-    
+    const [price, SetPrice] = useState(0);
 
-const getdata = useSelector((state)=> state.cartreducer.carts);
 
-const dispatch= useDispatch();
+
+
+    const getdata = useSelector((state) => state.cartreducer.carts);
+
+    const dispatch = useDispatch();
 
 
 
@@ -33,23 +33,23 @@ const dispatch= useDispatch();
     };
 
 
-const dlt = (id)=>{
-    dispatch(DLT(id))
-}
+    const dlt = (id) => {
+        dispatch(DLT(id))
+    }
 
-const total = ()=>{
+    const total = () => {
 
-    let price= 0;
-    getdata.map((ele,k)=>{
-        price = ele.price + price
-    });
-    SetPrice(price);
+        let price = 0;
+        getdata.map((ele, k) => {
+            price = ele.price * ele.qnty + price
+        });
+        SetPrice(price);
 
-};
+    };
 
-useEffect(()=>{
-    total();
-},[total])
+    useEffect(() => {
+        total();
+    }, [total])
 
     return (
         <>
@@ -87,65 +87,65 @@ useEffect(()=>{
                     horizontal: 'left',
                 }}
             >
-            { getdata.length ?
-                <div className="card-details" style={{width:"24rem", padding: 10}}>
-                    <Table>
-                        <thead>
-                            <tr>
-                                <th>Photo</th>
-                                <th>Restaurant Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                getdata.map((e)=>{
-                                    return (
-                                        <>
-                                        <tr>
-                                            <td>
-                                            <NavLink to={`/cart/${e.id}`} onClick={handleClose}>
+                {getdata.length ?
+                    <div className="card-details" style={{ width: "24rem", padding: 10 }}>
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>Restaurant Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    getdata.map((e) => {
+                                        return (
+                                            <>
+                                                <tr>
+                                                    <td>
+                                                        <NavLink to={`/cart/${e.id}`} onClick={handleClose}>
 
-                                                <img src={e.imgdata} style={{width:"5rem", height:"5rem"}}></img>
-                                                </NavLink>
-                                                
-                                            </td>
-                                            <td>
-                                               <p> {e.rname} </p>
-                                               <p> Price : ₹ {e.price} </p>
-                                               <p> Quantity :  {e.qnty} </p>
-                                               <p style={{color:"red", fontSize:20, cursor:"pointer"}}  onClick={()=>dlt(e.id)}>
-                                                <i className="fas fa-trash smalltrash"></i>
-                                               </p>
-                                            </td>
-                                            <td className="mt-5" style={{color:"red", fontSize:20, cursor:"pointer"}}  onClick={()=>dlt(e.id)}>
-                                            <i className="fas fa-trash largetrash"></i>
-                                            </td>
+                                                            <img src={e.imgdata} style={{ width: "5rem", height: "5rem" }}></img>
+                                                        </NavLink>
 
-                                        </tr>
-                                        </>
-                                    )
-                                })
-                            }
-                            <p className="text-center"> Total : ₹ {price}</p>
-                        </tbody>
-                    </Table>
+                                                    </td>
+                                                    <td>
+                                                        <p> {e.rname} </p>
+                                                        <p> Price : ₹ {e.price} </p>
+                                                        <p> Quantity :  {e.qnty} </p>
+                                                        <p style={{ color: "red", fontSize: 20, cursor: "pointer" }} onClick={() => dlt(e.id)}>
+                                                            <i className="fas fa-trash smalltrash"></i>
+                                                        </p>
+                                                    </td>
+                                                    <td className="mt-5" style={{ color: "red", fontSize: 20, cursor: "pointer" }} onClick={() => dlt(e.id)}>
+                                                        <i className="fas fa-trash largetrash"></i>
+                                                    </td>
 
-                </div> :
-                <div className="card-details d-flex justify-content-center align-items-center" style={{ width:"24rem", padding:10, position:"relative"}}>
-                <i  className="fas fa-close smallclose" onClick={handleClose}
-            style={{position:"absolute", top:2 , right :20, fontSize:23, cursor:"pointer"}}></i>
-                <p style={{fontSize:22}}>Your cart is empty</p>
-                <img src="cart.gif" className="emptycart_img" style={{width:"5rem" , padding:10}}/>
-            
+                                                </tr>
+                                            </>
+                                        )
+                                    })
+                                }
+                                <p className="text-center"> Total : ₹ {price}</p>
+                            </tbody>
+                        </Table>
 
-            </div>
-                
-            }
+                    </div> :
+                    <div className="card-details d-flex justify-content-center align-items-center" style={{ width: "24rem", padding: 10, position: "relative" }}>
+                        <i className="fas fa-close smallclose" onClick={handleClose}
+                            style={{ position: "absolute", top: 2, right: 20, fontSize: 23, cursor: "pointer" }}></i>
+                        <p style={{ fontSize: 22 }}>Your cart is empty</p>
+                        <img src="cart.gif" className="emptycart_img" style={{ width: "5rem", padding: 10 }} />
 
 
+                    </div>
+
+                }
 
 
-                
+
+
+
             </Menu>
         </>
     );
